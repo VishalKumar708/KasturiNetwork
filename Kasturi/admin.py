@@ -94,12 +94,21 @@ class ClientAdmin(admin.ModelAdmin):
     
     #show field categry wise when user add any record in this model
     fieldsets = [
-        ('Company Details', {'fields': ['company_name', 'owner', 'mobile_number', 'telephone', 'mail_id']}),
+        ('Company Details', {
+            "classes": ("collapse", "expanded", 'wide'),
+            'fields': ['company_name', 'owner', 'mobile_number', 'telephone', 'mail_id']}),
         ('Address Details', {'fields': ['country', 'state', 'city', 'district', 'address', 'pin_code', 'service_type']}),
         ('Bank Details', {'fields': ['account_holder_name', 'account_number', 'bank_name', 'ifsc_code', 'branch_name', 'pan_number', 'gst_number', 'payment_terms']}),
         # Add more fieldsets as needed
         ('Contact Details', {'fields': ['name', 'phone_number']}),
         ('Documents', {'fields': ['address_proof', 'company_proof', 'cancelled_check', 'gst_in', 'pan_card', 'attachment1', 'agreement', 'tds_excemption_certificate']}),
+    ]
+    tabs = [
+        ('Company', ('company_name', 'owner', 'mobile_number', 'telephone', 'mail_id')),
+        ('Address', ('country', 'state', 'city', 'district', 'address', 'pin_code', 'service_type')),
+        ('Bank', ('account_holder_name', 'account_number', 'bank_name', 'ifsc_code', 'branch_name', 'pan_number', 'gst_number', 'payment_terms')),
+        ('Contact', ('name', 'phone_number')),
+        # Add more tabs as needed
     ]
     
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
